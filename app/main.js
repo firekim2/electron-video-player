@@ -18,7 +18,7 @@ function createWindow () {
 		  'min-width': 640,
 		  'min-height': 480,
 		  frame:false,
-		  icon:__dirname+'/img/logo-256.png',
+		  icon:__dirname+'/img/favicon.png',
 		  'text-areas-are-resizable':false
 	  });
 

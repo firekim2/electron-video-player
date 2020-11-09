@@ -1,25 +1,56 @@
 {
-  "name": "electron-video-player",
-  "productName": "Electron Video Player",
-  "description": "Video player for local and remote files",
+  "name": "minkiii-video-player",
+  "productName": "Minkiii Video Player",
+  "description": "Video player for exhibition",
   "version": "0.0.1",
   "main": "app/main.js",
-  "author":"RIAEvangelist",
-  "dependencies": {
-
+  "author": "Sungwoo Kim forked from RIAEvangelist/electron-video-player",
+  "dependencies": {},
+  "scripts": {
+    "start": "electron .",
+    "deploy-win": "electron-builder --windows --x64",
+    "deploy-mac": "electron-builder --mac"
   },
   "devDependencies": {
     "electron-builder": "^10.9.3",
-    "electron":"7.1.2"
+    "electron": "7.1.2"
   },
   "license": "DBAD",
   "build": {
-    "linux":{
-      "category": "AudioVideo",
-      "packageCategory": "video"
+    "productName": "Minkiii player",
+    "appId": "com.electron.minkiplayer",
+    "asar": true,
+    "protocols": {
+      "name": "MinkiiiPlayer",
+      "schemes": [
+        "MinkiiiPlayer"
+      ]
     },
-    "mac":{
-      "category":"public.app-category.video"
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./resources/installer/favicon.png"
+    },
+    "mac": {
+      "target": [
+           "default"
+      ],
+      "icon": "./resources/installer/favicon.png"
+    },
+    "dmg": {
+      "title": "tournant",
+      "icon": "./resources/installer/favicon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
     }
   }
 }

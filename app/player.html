@@ -23,15 +23,18 @@
                 />
                 <button id='fullscreen' class='icon-fullscreen fullscreen'></button>
                 <button id='smallscreen' class='icon-fullscreen-exit smallscreen'></button>
+
             </div>
             <section id='dropArea' class='dropArea'>
                 <div class='dropZone'>
-                    Drag and Drop
-                    <br/>
-                    video here
+                    <span>
+                        Drag and Drop
+                    </span>
                 </div>
                 <button id='fileChooser' class='fileChooser'>
-                    Choose File
+                    <span>
+                        Choose File
+                    </span>
                 </button>
                 <input type='text'
                        id='enterLink'
@@ -43,6 +46,33 @@
                        id='chooseVideo'
                        class='chooseVideo hide'
                 />
+                <div class="timeSetter">
+                    <div>
+                        <span>
+                            First time
+                        </span>
+                        <input class="" type="number" id="startTime" max="23" min="0" value="8" step="1">
+                    </div>
+                    <div>
+                        <span>
+                            Last time
+                        </span>
+                        <input class="" type="number" id="endTime" max="23" min="0" value="20" step="1">
+                    </div>
+                    <div>
+                        <span>
+                            Interval
+                        </span>
+                        <input class="" type="number" id="intervalTime" max="24" min="0" value="1" step="1">
+                    </div>
+                </div>
+                <div class="hide" id="startButton">
+                    <span>Start</span>
+                </div>
+            </section>
+            <section class="timeInformation hide hidden">
+                <span id="time">
+                y분 뒤 시작합니다.</span>
             </section>
             <button id='close' class='close'>X</button>
             <section id='error' class='error hide hidden'>

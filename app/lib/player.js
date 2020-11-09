@@ -13,6 +13,19 @@ function bindEvents(){
     var video = document.querySelector('#videoContainer');
     var progBar = document.querySelector('#prog');
     var dropArea = document.querySelector('#dropArea');
+    let startButton = document.querySelector("#startButton");
+
+    startButton.addEventListener('click', () => {
+        hideFileArea();
+        playRequest();
+        document.querySelector('.dropArea').classList.remove('droppableArea');
+        fullscreened();
+        
+        let myDate = new Date();
+        let mins = myDate.getMinutes();
+        
+        showInfoArea(60 - mins);
+    });
 
     video.addEventListener(
         'timeupdate',
@@ -145,6 +158,7 @@ function playing(e){
     player.classList.remove('paused');
 
     hideFileArea();
+    hideInfoArea();
 }
 
 function fullscreened(e){
@@ -188,6 +202,34 @@ function showFileArea(){
     );
 }
 
+function hideInfoArea(){
+    let timeInfo = document.querySelector('.timeInformation');
+    timeInfo.classList.add('hidden');
+    document.querySelector(".video").style.opacity = 1;
+
+    setTimeout(
+        function(){
+            timeInfo.classList.add('hide');
+        },
+        500
+    );
+}
+
+function showInfoArea(minLeft){
+    let timeInfo = document.querySelector('.timeInformation');
+    let time = timeInfo.querySelector("#time");
+    time.innerText = minLeft + "분 뒤 시작합니다.";
+    timeInfo.classList.remove('hide');
+    document.querySelector(".video").style.opacity = 0;
+
+    setTimeout(
+        function(){
+            timeInfo.classList.remove('hidden');
+        },
+        10
+    );
+}
+
 function paused(e){
     var player = document.querySelector('#playerContainer');
 
@@ -195,7 +237,32 @@ function paused(e){
     document.querySelector('#play').classList.remove('hide');
     player.classList.add('paused');
 
-    showFileArea();
+    //showFileArea();
+}
+
+function playRequest(){
+    let startTime = document.querySelector("#startTime").value;
+    let endTime = document.querySelector("#endTime").value;
+    let interval = document.querySelector("#intervalTime").value;
+    document.querySelector(".video").style.opacity = 0;
+
+    let intervalId = window.setInterval(function() {
+        let myDate = new Date();
+        let hours = myDate.getHours();
+        let mins = myDate.getMinutes();
+        let secconds = myDate.getSeconds();
+        
+        showInfoArea(60 - mins);
+        
+        if(hours > endTime) return;
+        if(hours < startTime) return;
+
+        if (mins == 0){
+            togglePlay();
+            window.clearInterval(intervalId);
+        }
+
+    }, 60 * 1000);
 }
 
 function ended(e){
@@ -204,8 +271,10 @@ function ended(e){
     document.querySelector('#play').classList.remove('hide');
     document.querySelector('#pause').classList.add('hide');
     player.classList.add('paused');
-
-    showFileArea();
+    
+    playRequest();
+    
+    //showFileArea();
 }
 
 function makeDroppable(e) {
@@ -242,8 +311,10 @@ function loadVideo(e) {
             video.src=files[i].path;
             setTimeout(
                 function(){
-                    document.querySelector('.dropArea').classList.remove('droppableArea');
-                    document.querySelector('.play:not(.hide),.pause:not(.hide)').click();
+                    //document.querySelector('.dropArea').classList.remove('droppableArea');
+                    //document.querySelector('.play:not(.hide),.pause:not(.hide)').click();
+                    document.querySelector("#fileChooser").style.backgroundColor = "#77dd77";
+                    document.querySelector("#startButton").classList.remove("hide");
                 },
                 250
             );

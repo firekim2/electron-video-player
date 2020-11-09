@@ -1,0 +1,27 @@
+directories:
+  output: ./dist/
+  buildResources: ./resources/installer/
+  app: .
+productName: Minkiii player
+appId: com.electron.minkiplayer
+asar: true
+protocols:
+  name: MinkiiiPlayer
+  schemes:
+    - MinkiiiPlayer
+win:
+  target:
+    - zip
+    - nsis
+  icon: ./resources/installer/favicon.png
+mac:
+  target:
+    - default
+  icon: ./resources/installer/favicon.png
+dmg:
+  title: tournant
+  icon: ./resources/installer/favicon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 7.1.2
